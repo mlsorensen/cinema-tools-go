@@ -1,3 +1,6 @@
+# github.com/mlsorensen/grafikeye v0.0.0-20210815190707-928ff2100c89
+## explicit; go 1.16
+github.com/mlsorensen/grafikeye/pkg/serial
 # github.com/mlsorensen/lumagen v0.0.0-20220711022731-faa60f59ef30
 ## explicit; go 1.16
 github.com/mlsorensen/lumagen/pkg/serial
@@ -13,3 +16,6 @@ github.com/tarm/serial
 ## explicit; go 1.17
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
+# gopkg.in/yaml.v3 v3.0.1
+## explicit
+gopkg.in/yaml.v3

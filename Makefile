@@ -10,6 +10,7 @@ release: $(PLATFORMS)
 $(PLATFORMS):
 	GOOS=$(os) GOARCH=$(arch) go build -o build/lumagen-monitor-$(alias) cmd/lumagen-monitor.go
 	GOOS=$(os) GOARCH=$(arch) go build -o build/urtsi2-cmd-$(alias) cmd/urtsi2-cmd.go
+	GOOS=$(os) GOARCH=$(arch) go build -o build/cinemacontrol-$(alias) cmd/cinemacontrol.go
 
 clean:
 	rm -rf ./build

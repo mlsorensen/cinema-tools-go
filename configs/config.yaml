@@ -1,0 +1,21 @@
+# Sample config.
+# Windows will have COM# ports, Linux/Mac will have /dev/tty
+# For GrafikEye button IDs, see https://github.com/mlsorensen/grafikeye/blob/main/pkg/serial/constants.go
+# for URTSI commands, see URTSI instructions and examples at https://github.com/mlsorensen/urtsi2/blob/main/pkg/serial/session.go
+urtsiPort: /dev/TTYUSB0
+grafikEyePort: /dev/TTYUSB1
+lumagenPort: /dev/TTYUSB2
+lumagenActions:
+  - aspects: [ 235, 240 ]
+    framerates: [ 24, 23 ]
+    urtsiCommand: "0101U\n"
+  - aspects: [ 133, 143 ]
+    framerates: [ 60, 59 ]
+    urtsiCommand: "0101D\n"
+grafikEyeActions:
+  - buttonId: 38
+    eventId: 4
+    urtsiCommand: "0101D\n"
+  - buttonId: 40
+    eventId: 4
+    urtsiCommand: "0101U\n"
