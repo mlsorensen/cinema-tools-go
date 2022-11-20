@@ -1,4 +1,4 @@
-PLATFORMS := linux/amd64/lin64 linux/arm64/linarm windows/amd64/win64.exe darwin/arm64/macM1
+PLATFORMS := linux/amd64/lin64 linux/arm/linarm windows/amd64/win64.exe darwin/arm64/macM1
 
 temp = $(subst /, ,$@)
 os = $(word 1, $(temp))
