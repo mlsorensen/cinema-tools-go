@@ -4,6 +4,7 @@ import (
 	"cinema-tools/internal/cfg"
 	"errors"
 	"flag"
+	"fmt"
 	grafikeye "github.com/mlsorensen/grafikeye/pkg/serial"
 	lumagen "github.com/mlsorensen/lumagen/pkg/serial"
 	lumagenMessage "github.com/mlsorensen/lumagen/pkg/serial/message"
@@ -66,8 +67,10 @@ func main() {
 func lumagenMessageHandler(msg lumagenMessage.ZQI22Message) {
 	log.Printf("Handling I22 message: %v\n", msg)
 
+	var matched = false
 	for _, action := range config.LumagenActions {
 		if action.FramerateIn(msg.SourceFrameRate) && action.AspectIn(msg.SourceAspectRatio) {
+			matched = true
 			err := sendUrtsiCommand(action.UrtsiCommand)
 			if err != nil {
 				log.Printf("error while sending URTSI command: %v\n", err)
@@ -78,6 +81,9 @@ func lumagenMessageHandler(msg lumagenMessage.ZQI22Message) {
 				log.Printf("error while sending GrafikEye command: %v\n", err)
 			}
 		}
+	}
+	if !matched {
+		log.Printf("No action found matching aspect %d and framerate %d", msg.SourceAspectRatio, msg.SourceFrameRate)
 	}
 }
 
@@ -93,15 +99,21 @@ func grafikEyeMessageHandler(msg grafikeye.QSCommand) {
 		return
 	}
 
+	var matched = false
 	for _, action := range config.GrafikEyeActions {
 		buttonId := strconv.Itoa(int(action.ButtonId))
 		eventId := strconv.Itoa(int(action.Event))
 		if msg.CommandFields[0] == buttonId && msg.CommandFields[1] == eventId {
+			matched = true
 			err := sendUrtsiCommand(action.UrtsiCommand)
 			if err != nil {
 				log.Printf("error while sending URTSI comand: %v\n", err)
 			}
 		}
+	}
+
+	if !matched {
+		log.Printf("No GrafikEye action found matching button id %d event %d", msg.CommandFields[0], msg.CommandFields[1])
 	}
 }
 
@@ -122,7 +134,7 @@ func sendUrtsiCommand(command string) error {
 		return errors.New("URTSI session not yet established, skipping")
 	}
 
-	return urtsiSession.Send(command)
+	return urtsiSession.Send(fmt.Sprintf("%s\n", command))
 }
 
 func pressGrafikEyeButtonId(buttonId uint8) error {

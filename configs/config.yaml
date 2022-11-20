@@ -8,14 +8,39 @@ lumagenPort: /dev/TTYUSB2
 lumagenActions:
   - aspects: [ 235, 240 ]
     framerates: [ 24, 23 ]
-    urtsiCommand: "0101U\n"
-  - aspects: [ 133, 143 ]
+    urtsiCommand: "0101U"
+    grafikEyePressButtonId: 77
+  - aspects: [ 133 ]
     framerates: [ 60, 59 ]
-    urtsiCommand: "0101D\n"
+    urtsiCommand: "0101D"
+    grafikEyePressButtonId: 76
+  - aspects: [ 143 ]
+    framerates: [ 60, 59 ]
+    urtsiCommand: "0101D;W9;0101U;W1;0101S"
+    grafikEyePressButtonId: 76
+  - aspects: [ 178 ]
+    framerates: [ 60, 59 ]
+    urtsiCommand: "0101S"
+    grafikEyePressButtonId: 71
+  - aspects: [ 185 ]
+    framerates: [ 23, 24 ]
+    urtsiCommand: "0101S;W9;0101U;W1;0101S"
+    grafikEyePressButtonId: 71
+  - aspects: [ 220 ]
+    framerates: [ 23, 24 ]
+    urtsiCommand: "0101U;W9;0101D;W2;0101S"
+    grafikEyePressButtonId: 71
+  - aspects: [ 200 ]
+    framerates: [ 23, 24 ]
+    urtsiCommand: "0101S;W9;0101U;W2;0101S"
+    grafikEyePressButtonId: 71
 grafikEyeActions:
   - buttonId: 38
     eventId: 4
-    urtsiCommand: "0101D\n"
+    urtsiCommand: "0101D"
+  - buttonId: 39
+    eventId: 4
+    urtsiCommand: "0101S"
   - buttonId: 40
     eventId: 4
-    urtsiCommand: "0101U\n"
+    urtsiCommand: "0101U"
