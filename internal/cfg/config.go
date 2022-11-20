@@ -9,6 +9,7 @@ import (
 
 type Config struct {
 	UrtsiPort        string            `yaml:"urtsiPort"`
+	UrtsiDelay       uint8             `yaml:"urtsiCommandDelay"`
 	GrafikEyePort    string            `yaml:"grafikEyePort"`
 	LumagenPort      string            `yaml:"lumagenPort"`
 	LumagenActions   []LumagenAction   `yaml:"lumagenActions"`

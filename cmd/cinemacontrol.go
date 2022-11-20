@@ -12,6 +12,7 @@ import (
 	urtsi2 "github.com/mlsorensen/urtsi2/pkg/serial"
 	"log"
 	"strconv"
+	"time"
 )
 
 var (
@@ -60,7 +61,6 @@ func main() {
 	}
 
 	log.Printf("Monitoring Lumagen at %s\n", config.LumagenPort)
-
 	select {}
 }
 
@@ -71,14 +71,15 @@ func lumagenMessageHandler(msg lumagenMessage.ZQI22Message) {
 	for _, action := range config.LumagenActions {
 		if action.FramerateIn(msg.SourceFrameRate) && action.AspectIn(msg.SourceAspectRatio) {
 			matched = true
-			err := sendUrtsiCommand(action.UrtsiCommand)
-			if err != nil {
-				log.Printf("error while sending URTSI command: %v\n", err)
-			}
 
-			err = pressGrafikEyeButtonId(action.GrafikEyePressButtonId)
+			err := pressGrafikEyeButtonId(action.GrafikEyePressButtonId)
 			if err != nil {
 				log.Printf("error while sending GrafikEye command: %v\n", err)
+			}
+
+			err = sendUrtsiCommand(action.UrtsiCommand)
+			if err != nil {
+				log.Printf("error while sending URTSI command: %v\n", err)
 			}
 		}
 	}
@@ -134,6 +135,13 @@ func sendUrtsiCommand(command string) error {
 		return errors.New("URTSI session not yet established, skipping")
 	}
 
+	/*
+		TODO: Debug why URTSI commands when GraphikEye is present are more reliable after delay.
+		   Confirmed that commands make it the URTSI device. Radio interference?
+	*/
+	delay := time.Second * time.Duration(config.UrtsiDelay)
+	time.Sleep(delay)
+	log.Printf("sending URTSI command %s with delay %v", command, delay)
 	return urtsiSession.Send(fmt.Sprintf("%s\n", command))
 }
 
