@@ -113,7 +113,7 @@ func grafikEyeMessageHandler(msg grafikeye.QSCommand) {
 	}
 
 	if !matched {
-		log.Printf("No GrafikEye action found matching button id %d event %d", msg.CommandFields[0], msg.CommandFields[1])
+		log.Printf("No GrafikEye action found matching button id %s event %s", msg.CommandFields[0], msg.CommandFields[1])
 	}
 }
 
