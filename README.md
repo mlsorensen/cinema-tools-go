@@ -12,6 +12,9 @@ This is a program designed to listen for Lumagen and GrafikEye serial messages a
 It is configuration-driven, you provide a combination of Lumagen aspect ratios/framerates or GrafikEye button events to 
 match, and then a combination of actions to send to a Somfy URTSI2 serial bridge or GrafikEye in response.
 
+Configuration is read from the current directory by default, looking for `config.yaml` file.  Alternatively, a `-config`
+flag can be provided to give a custom configuration path.
+
 A simple configuration that listens for Lumagen messages indicating cinemascope and 24fps and sends a URTSI2 command
 to open shades (which really corresponds to screen masks) might look like this:
 
