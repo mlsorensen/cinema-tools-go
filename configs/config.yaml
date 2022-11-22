@@ -2,6 +2,7 @@
 # Windows will have COM# ports, Linux/Mac will have /dev/tty
 # For GrafikEye button IDs, see https://github.com/mlsorensen/grafikeye/blob/main/pkg/serial/constants.go
 # for URTSI commands, see URTSI instructions and examples at https://github.com/mlsorensen/urtsi2/blob/main/pkg/serial/session.go
+# also official URTSI doc https://service.somfy.com/downloads/nam_v4/universalrts_interface_instructions.pdf
 urtsiPort: /dev/ttyUSB2
 grafikEyePort: /dev/ttyUSB0
 lumagenPort: /dev/ttyUSB1
