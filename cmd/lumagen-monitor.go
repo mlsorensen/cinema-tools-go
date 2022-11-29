@@ -7,6 +7,8 @@ import (
 	"github.com/mlsorensen/lumagen/pkg/serial/message"
 	"github.com/mlsorensen/lumagen/pkg/serial/parsers"
 	"log"
+	"os"
+	"time"
 )
 
 func main() {
@@ -14,7 +16,9 @@ func main() {
 	flag.Parse()
 
 	if len(*port) == 0 {
-		log.Fatal("Please provide a serial port via the -port flag")
+		log.Printf("Please provide a serial port via the -port flag")
+		time.Sleep(time.Second * 5)
+		os.Exit(1)
 	}
 
 	mon := serial.LumagenSession{SerialPort: *port}

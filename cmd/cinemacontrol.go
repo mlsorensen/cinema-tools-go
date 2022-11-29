@@ -37,11 +37,11 @@ func main() {
 	}
 
 	if !config.LumagenConfigured() {
-		log.Fatal("Please provide a serial port via the -lumagen-port flag")
+		log.Fatal("Please provide a lumagen serial port in configuration")
 	}
 
 	if !config.UrtsiConfigured() {
-		log.Fatal("Please provide a serial port via the -urtsi-port flag")
+		log.Fatal("Please provide a urtsi port in configuration")
 	}
 
 	if config.GrafikEyeConfigured() {

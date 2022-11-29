@@ -4,6 +4,8 @@ import (
 	"flag"
 	. "github.com/mlsorensen/urtsi2/pkg/serial"
 	"log"
+	"os"
+	"time"
 )
 
 func main() {
@@ -13,15 +15,21 @@ func main() {
 	flag.Parse()
 
 	if len(*port) == 0 {
-		log.Fatal("Please provide a serial port via the -port flag")
+		log.Println("Please provide a serial port via the -port flag")
+		time.Sleep(time.Second * 5)
+		os.Exit(1)
 	}
 
 	if *closeShade && *openShade {
-		log.Fatal("Provide only -close or -open flag, not both")
+		log.Println("Provide only -close or -open flag, not both")
+		time.Sleep(time.Second * 5)
+		os.Exit(1)
 	}
 
 	if !*closeShade && !*openShade {
-		log.Fatal("One of -close or -open is required")
+		log.Println("Please provide an action, one of flags -close or -open is required")
+		time.Sleep(time.Second * 5)
+		os.Exit(1)
 	}
 
 	cmd := CommandOpen
