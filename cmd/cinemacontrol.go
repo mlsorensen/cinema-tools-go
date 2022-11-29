@@ -32,6 +32,9 @@ func main() {
 	}
 
 	config, err = cfg.LoadConfig(*cfgPath)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	if !config.LumagenConfigured() {
 		log.Fatal("Please provide a serial port via the -lumagen-port flag")
